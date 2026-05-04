@@ -1,4 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
+
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 import { getUserByUsername, updateUserProfile } from "@/lib/services/user-service";
 import { updateUserSchema } from "@/lib/validators/user";
 

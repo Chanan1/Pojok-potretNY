@@ -1,4 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
+
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 import { getTemplateById, updateTemplate, deleteTemplate } from "@/lib/services/template-service";
 import { updateTemplateSchema } from "@/lib/validators/template";
 

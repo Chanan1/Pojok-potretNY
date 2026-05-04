@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
-export const dynamic = "force-dynamic";
 import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/db";
+
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
 export async function GET() {
   try {
@@ -36,7 +38,7 @@ export async function GET() {
       success: true,
       data: user,
     });
-  } catch (error) {
+  } catch (_error) {
     return NextResponse.json(
       { success: false, error: "Failed to get user" },
       { status: 500 }

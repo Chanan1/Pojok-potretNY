@@ -1,4 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
+
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 import { toggleLike } from "@/lib/services/template-service";
 import { getSession } from "@/lib/auth";
 import { ensureUser } from "@/lib/services/user-service";
