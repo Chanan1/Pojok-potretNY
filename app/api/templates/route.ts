@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+export const dynamic = "force-dynamic";
 import { getTemplates, createTemplate } from "@/lib/services/template-service";
 import { templateQuerySchema, createTemplateSchema } from "@/lib/validators/template";
 import { getSession } from "@/lib/auth";
