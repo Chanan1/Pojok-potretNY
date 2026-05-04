@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String     @id @default(cuid())
+  name      String
+  username  String     @unique
+  email     String     @unique
+  password  String
+  avatar    String?
+  bio       String?
+  level     Int        @default(1)
+  socials   String     @default("{}")
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  likes     Like[]
+  templates Template[]
+}
+
+model Template {
+  id              String   @id @default(cuid())
+  name            String
+  description     String?
+  src             String
+  category        String
+  frameCount      Int
+  slots           String   @default("[]")
+  backgroundColor String   @default("transparent")
+  margin          Int      @default(10)
+  borderRadius    Int      @default(0)
+  status          String   @default("DRAFT")
+  isPublic        Boolean  @default(true)
+  creatorId       String
+  usageCount      Int      @default(0)
+  downloadCount   Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  likes           Like[]
+  creator         User     @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+
+  @@index([category])
+  @@index([creatorId])
+  @@index([status])
+  @@index([frameCount])
+}
+
+model Like {
+  id         String   @id @default(cuid())
+  userId     String
+  templateId String
+  createdAt  DateTime @default(now())
+  template   Template @relation(fields: [templateId], references: [id], onDelete: Cascade)
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, templateId])
+}
+
+model BoothSession {
+  id         String   @id @default(cuid())
+  templateId String?
+  layout     String   @default("portrait")
+  filter     String   @default("normal")
+  photoCount Int      @default(4)
+  resultUrl  String?
+  metadata   String   @default("{}")
+  createdAt  DateTime @default(now())
+}

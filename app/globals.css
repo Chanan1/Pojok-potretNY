@@ -1,7 +1,21 @@
 @import "tailwindcss";
 
+/* Override Tailwind lab() colors - Force all to use RGB hex values */
+@layer theme {
+  :root,
+  :host {
+    /* Remove lab() color variables by overriding with hex */
+    --color-red-50: #fef2f2 !important;
+    --color-red-100: #fee2e2 !important;
+    --color-red-200: #fecaca !important;
+    --color-red-400: #f87171 !important;
+    --color-red-500: #ef4444 !important;
+    --color-red-600: #dc2626 !important;
+  }
+}
+
 :root {
-  --background: #ffffff;
+  --background: #fff;
   --foreground: #171717;
 }
 
@@ -10,17 +24,29 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-dancing-script: var(--font-dancing-script);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  color-scheme: light;
 }
 
 body {
+  min-height: 100vh;
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.font-script {
+  font-family: var(--font-dancing-script);
+}
+
+/* Hide scrollbar for carousel */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
